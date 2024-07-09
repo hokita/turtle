@@ -2,8 +2,15 @@ package main
 
 import "testing"
 
-func TestTalk(t *testing.T) {
-	if talk() != "I'm walking slowly." {
-		t.Error("Test failed")
+func TestLoadConfig(t *testing.T) {
+	yaml := []byte(`
+endpoints:
+  sample:
+    url: "https://example.com"
+`)
+
+	config, _ := loadConfig(yaml)
+	if config.Endpoints["sample"].URL != "https://example.com" {
+		t.Fatalf("expected https://example.com, got %s", config.Endpoints["sample"].URL)
 	}
 }

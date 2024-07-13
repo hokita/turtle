@@ -1,3 +1,5 @@
 endpoints:
-  sample:
+  ditto:
     url: "https://pokeapi.co/api/v2/pokemon/ditto"
+  tyranitar:
+    url: "https://pokeapi.co/api/v2/pokemon/tyranitar"

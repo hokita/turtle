@@ -10,17 +10,11 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-const fileEnv = "TURTLE_CONFIG_FILE"
+const filePath = "turtle.yaml"
 
 var ErrMissingTarget = errors.New("missing target argument")
-var ErrMissingFile = errors.New("missing environment variable")
 
 func turtle() error {
-	filePath := os.Getenv(fileEnv)
-	if filePath == "" {
-		return ErrMissingFile
-	}
-
 	if len(os.Args) < 2 {
 		return ErrMissingTarget
 	}

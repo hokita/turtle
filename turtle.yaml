@@ -1,5 +1,12 @@
 endpoints:
-  ditto:
-    url: "https://pokeapi.co/api/v2/pokemon/ditto"
-  tyranitar:
-    url: "https://pokeapi.co/api/v2/pokemon/tyranitar"
+  sample1:
+    method: "GET"
+    url: "http://example.com/sample1"
+  sample2:
+    method: "POST"
+    url: "http://example.com/sample2"
+    body: |
+      {
+        "name": "Karashi",
+        "type": "Degu"
+      }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"errors"
 	"fmt"
 	"io"
@@ -45,6 +46,22 @@ func call(filePath, target string) (string, error) {
 		return "", errors.New("endpoint not found")
 	}
 
+	if endpoint.Method == "POST" {
+		resp, err := http.Post(endpoint.URL, "application/json", bytes.NewBuffer([]byte(endpoint.Body)))
+		if err != nil {
+			return "", err
+		}
+		defer resp.Body.Close()
+
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return "", err
+		}
+
+		return string(body), nil
+	}
+
+	// GET
 	resp, err := http.Get(endpoint.URL)
 	if err != nil {
 		return "", err
@@ -73,5 +90,7 @@ type Config struct {
 }
 
 type Endpoint struct {
-	URL string `yaml:"url"`
+	URL    string `yaml:"url"`
+	Method string `yaml:"method"`
+	Body   string `yaml:"body"`
 }
